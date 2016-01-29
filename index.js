@@ -43,7 +43,8 @@ var Goertzel = function (opts) {
     var imaginary = q2 * s
     var magSquared = real * real + imaginary * imaginary
 
-    return magSquared > 1
+    console.log(magSquared)
+    return magSquared
   }
 }
 
