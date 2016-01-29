@@ -1,16 +1,17 @@
 {
-  "name": "goertzel-fsk",
+  "name": "goertzel",
   "description": "Fast frequency detection using the Goertzel algorithm",
   "version": "0.0.0",
   "repository": {
-    "url": "git://github.com/noffle/goertzel-fsk.git"
+    "url": "git://github.com/noffle/goertzel.git"
   },
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tape test/*.js && standard"
   },
   "dependencies": {},
   "devDependencies": {
-    "tape": "*"
+    "standard": "5.4.1",
+    "tape": "4.4.0"
   }
 }
