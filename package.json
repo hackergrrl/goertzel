@@ -13,5 +13,14 @@
   "devDependencies": {
     "standard": "5.4.1",
     "tape": "4.4.0"
-  }
+  },
+  "keywords": [
+    "goertzel",
+    "frequency",
+    "fft",
+    "dft",
+    "fourier",
+    "detect",
+    "detection"
+  ]
 }
