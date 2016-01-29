@@ -2,6 +2,8 @@ var Goertzel = function (opts) {
   if (!(this instanceof Goertzel)) return new Goertzel(opts)
   if (!opts) opts = {}
 
+  if (!opts.threshold) opts.threshold = 1000
+
   if (!opts.numSamples) {
     throw new Error('must specify opts.numSamples')
   }
@@ -43,8 +45,10 @@ var Goertzel = function (opts) {
     var imaginary = q2 * s
     var magSquared = real * real + imaginary * imaginary
 
-    console.log(magSquared)
-    return magSquared
+    // console.log('real', real)
+    // console.log('imaginary', imaginary)
+    // console.log('magnitude', magSquared)
+    return magSquared > opts.threshold
   }
 }
 

@@ -28,7 +28,7 @@ test('1 Hz', function (t) {
   }
 
   var match = goertzel.detect(data)
-  t.equals(match > 1000, true)
+  t.equals(match, true)
 })
 
 test('5 kHz', function (t) {
@@ -53,7 +53,7 @@ test('5 kHz', function (t) {
   }
 
   var match = goertzel.detect(data)
-  t.equals(match > 1000, true)
+  t.equals(match, true)
 })
 
 // 75% of the samples are at 25 Hz
@@ -100,20 +100,20 @@ test('25 Hz and 50 Hz', function (t) {
   }
 
   // generate 250 samples at 50 Hz
-  for (var i = 0; i < 250; i++) {
-    var v = sin(50, i / sampleRate)
+  for (i = 0; i < 250; i++) {
+    v = sin(50, i / sampleRate)
     data.push(v)
   }
 
   // check for 50 Hz
   var match = goertzel50.detect(data)
-  t.equals(match > 1000, true)
+  t.equals(match, true)
 
   // check for 25 Hz
-  var match = goertzel25.detect(data)
-  t.equals(match > 1000, true)
+  match = goertzel25.detect(data)
+  t.equals(match, true)
 
   // check for 7 Hz
-  var match = goertzel7.detect(data)
-  t.equals(match > 1000, false)
+  match = goertzel7.detect(data)
+  t.equals(match, false)
 })
