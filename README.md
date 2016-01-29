@@ -49,10 +49,10 @@ var Goertzel = require('goertzel')
 
 Returns an object set to detect a single specific frequency.
 
-`opts` is mandatory, and has some required and optional paremters:
+`opts` is mandatory, and has some required and optional parameters:
 
 - `opts.targetFrequency` (required) - the frequency, in Hertz, to detect the
-  presence of
+  presence of.
 - `opts.numSamples` (required) - the number of samples (each -1 to 1) to perform
   detection on. This needs to be consistent.
 - `opts.sampleRate` (required) - how many samples are taken per second. For best
