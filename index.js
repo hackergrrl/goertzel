@@ -14,8 +14,8 @@ var Goertzel = function (opts) {
     throw new Error('must specify opts.sampleRate')
   }
 
-  if (opts.sampleRate < opts.targetFrequency * 2.5) {
-    throw new Error('sampleRate should be at least ~2.5 times larger than targetFrequency')
+  if (opts.sampleRate < opts.targetFrequency * 2) {
+    throw new Error('sampleRate should be at least 2 times larger than targetFrequency')
   }
 
   // references:
