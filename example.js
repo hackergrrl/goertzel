@@ -5,7 +5,7 @@ var opts = {
   // samples per second
   sampleRate: 10000,
   // samples per block
-  blockSize: 100
+  numSamples: 100
 }
 
 var goertzel = Goertzel(opts)
@@ -17,9 +17,8 @@ function sin (hz, t) {
 
 // generate a sine wave at 1 kHz for 1 second
 var data = []
-for (var i = 0; i < opts.blockSize; i++) {
+for (var i = 0; i < opts.numSamples; i++) {
   var v = sin(1000, i / opts.sampleRate)
-  console.log(v)
   data.push(v)
 }
 

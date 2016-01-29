@@ -2,8 +2,8 @@ var Goertzel = function (opts) {
   if (!(this instanceof Goertzel)) return new Goertzel(opts)
   if (!opts) opts = {}
 
-  if (!opts.blockSize) {
-    throw new Error('must specify opts.blockSize')
+  if (!opts.numSamples) {
+    throw new Error('must specify opts.numSamples')
   }
   if (!opts.targetFrequency) {
     throw new Error('must specify opts.targetFrequency')
@@ -19,8 +19,8 @@ var Goertzel = function (opts) {
   // references:
   //   https://en.wikipedia.org/wiki/Goertzel_algorithm
   //   http://www.embedded.com/design/configurable-systems/4024443/The-Goertzel-Algorithm
-  var k = Math.floor(0.5 + (opts.blockSize * opts.targetFrequency) / opts.sampleRate)
-  var w = (2 * Math.PI / opts.blockSize) * k
+  var k = Math.floor(0.5 + (opts.numSamples * opts.targetFrequency) / opts.sampleRate)
+  var w = (2 * Math.PI / opts.numSamples) * k
   var c = Math.cos(w)
   var s = Math.sin(w)
   var coeff = 2 * c
@@ -30,7 +30,7 @@ var Goertzel = function (opts) {
   var q2 = 0
 
   this.detect = function (samples) {
-    // TODO: assert 'samples.length' === opts.blockSize
+    // TODO: assert 'samples.length' >= opts.numSamples
     q1 = q2 = 0
 
     for (var i = 0; i < samples.length; i++) {
@@ -43,7 +43,6 @@ var Goertzel = function (opts) {
     var imaginary = q2 * s
     var magSquared = real * real + imaginary * imaginary
 
-    console.log(magSquared)
     return magSquared > 1
   }
 }
