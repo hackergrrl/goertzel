@@ -1,12 +1,9 @@
-var Goertzel = function (opts) {
-  if (!(this instanceof Goertzel)) return new Goertzel(opts)
+module.exports = function (opts) {
+  // if (!(this instanceof Goertzel)) return new Goertzel(opts)
   if (!opts) opts = {}
 
   if (!opts.threshold) opts.threshold = 1000
 
-  if (!opts.numSamples) {
-    throw new Error('must specify opts.numSamples')
-  }
   if (!opts.targetFrequency) {
     throw new Error('must specify opts.targetFrequency')
   }
@@ -18,21 +15,20 @@ var Goertzel = function (opts) {
     throw new Error('sampleRate should be at least 2 times larger than targetFrequency')
   }
 
-  // references:
-  //   https://en.wikipedia.org/wiki/Goertzel_algorithm
-  //   http://www.embedded.com/design/configurable-systems/4024443/The-Goertzel-Algorithm
-  var k = Math.floor(0.5 + (opts.numSamples * opts.targetFrequency) / opts.sampleRate)
-  var w = (2 * Math.PI / opts.numSamples) * k
-  var c = Math.cos(w)
-  var s = Math.sin(w)
-  var coeff = 2 * c
+  return function (samples) {
+    // references:
+    //   https://en.wikipedia.org/wiki/Goertzel_algorithm
+    //   http://www.embedded.com/design/configurable-systems/4024443/The-Goertzel-Algorithm
+    var k = Math.floor(0.5 + (samples.length * opts.targetFrequency) / opts.sampleRate)
+    var w = (2 * Math.PI / samples.length) * k
+    var c = Math.cos(w)
+    var s = Math.sin(w)
+    var coeff = 2 * c
 
-  var q0 = 0
-  var q1 = 0
-  var q2 = 0
+    var q0 = 0
+    var q1 = 0
+    var q2 = 0
 
-  this.detect = function (samples) {
-    // TODO: assert 'samples.length' >= opts.numSamples
     q1 = q2 = 0
 
     for (var i = 0; i < samples.length; i++) {
@@ -51,5 +47,3 @@ var Goertzel = function (opts) {
     return magSquared > opts.threshold
   }
 }
-
-module.exports = Goertzel

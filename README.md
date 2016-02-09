@@ -7,7 +7,7 @@ frequency detection.
 # example
 
 ```js
-var Goertzel = require('goertzel')
+var goertzel = require('goertzel')
 
 var opts = {
   // 1 kHz
@@ -18,7 +18,7 @@ var opts = {
   numSamples: 100
 }
 
-var goertzel = Goertzel(opts)
+var detect = goertzel(opts)
 
 // generate sine wave at some Hz and time (ms)
 function sin (hz, t) {
@@ -32,7 +32,7 @@ for (var i = 0; i < opts.numSamples; i++) {
   data.push(v)
 }
 
-console.log(goertzel.detect(data))
+console.log(detect(data))
 ```
 
 ```
@@ -41,20 +41,14 @@ true
 
 # methods
 
-```js
-var Goertzel = require('goertzel')
-```
+## var detect = goertzel(opts={})
 
-# var goertzel = Goertzel(opts={})
-
-Returns an object set to detect a single specific frequency.
+Returns a function set to detect a single frequency.
 
 `opts` is mandatory, and has some required and optional parameters:
 
 - `opts.targetFrequency` (required) - the frequency, in Hertz, to detect the
-  presence of.
-- `opts.numSamples` (required) - the number of samples (each -1 to 1) to perform
-  detection on. This needs to be consistent.
+  presence of
 - `opts.sampleRate` (required) - how many samples are taken per second. For best
   results, this should be at least twice the [Nyquist
   frequency](https://en.wikipedia.org/wiki/Nyquist_frequency). 2.5x works well.
@@ -62,10 +56,12 @@ Returns an object set to detect a single specific frequency.
   magnitude of how well the samples match the `targetFrequency`. Set this to
   control the threshold. In general, the default value can be used safely.
 
-# goertzel.detect(data)
+## detect(data)
 
 Returns a `boolean`: `true` if the `targetFrequency` is present in the samples,
 and `false` otherwise.
+
+`data` is expected to be compatible with a `Float32Array`.
 
 # install
 

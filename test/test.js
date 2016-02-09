@@ -1,5 +1,5 @@
 var test = require('tape')
-var Goertzel = require('../index')
+var goertzel = require('../index')
 
 // sine wave at some Hz and time offset (ms)
 function sin (hz, t) {
@@ -18,7 +18,7 @@ test('1 Hz', function (t) {
     numSamples: 100
   }
 
-  var goertzel = Goertzel(opts)
+  var detect = goertzel(opts)
 
   // generate a sine wave at 1 Hz
   var data = []
@@ -27,7 +27,7 @@ test('1 Hz', function (t) {
     data.push(v)
   }
 
-  var match = goertzel.detect(data)
+  var match = detect(data)
   t.equals(match, true)
 })
 
@@ -43,7 +43,7 @@ test('5 kHz', function (t) {
     numSamples: 100
   }
 
-  var goertzel = Goertzel(opts)
+  var detect = goertzel(opts)
 
   // generate a sine wave at 5000 Hz
   var data = []
@@ -52,7 +52,7 @@ test('5 kHz', function (t) {
     data.push(v)
   }
 
-  var match = goertzel.detect(data)
+  var match = detect(data)
   t.equals(match, true)
 })
 
@@ -64,7 +64,7 @@ test('25 Hz and 50 Hz', function (t) {
   var sampleRate = 200
 
   // detect 50 Hz
-  var goertzel50 = Goertzel({
+  var goertzel50 = goertzel({
     // hz
     targetFrequency: 50,
     // samples per second
@@ -73,7 +73,7 @@ test('25 Hz and 50 Hz', function (t) {
     numSamples: 1000
   })
   // detect 25 Hz
-  var goertzel25 = Goertzel({
+  var goertzel25 = goertzel({
     // hz
     targetFrequency: 25,
     // samples per second
@@ -82,7 +82,7 @@ test('25 Hz and 50 Hz', function (t) {
     numSamples: 1000
   })
   // detect 7 Hz
-  var goertzel7 = Goertzel({
+  var goertzel7 = goertzel({
     // hz
     targetFrequency: 7,
     // samples per second
@@ -106,14 +106,14 @@ test('25 Hz and 50 Hz', function (t) {
   }
 
   // check for 50 Hz
-  var match = goertzel50.detect(data)
+  var match = goertzel50(data)
   t.equals(match, true)
 
   // check for 25 Hz
-  match = goertzel25.detect(data)
+  match = goertzel25(data)
   t.equals(match, true)
 
   // check for 7 Hz
-  match = goertzel7.detect(data)
+  match = goertzel7(data)
   t.equals(match, false)
 })
