@@ -51,13 +51,9 @@ module.exports = function (opts) {
     // console.log('samples', samples.length)
     // console.log('rate', opts.sampleRate)
     // console.log('magSquared', magSquared)
-    console.log(new Array(80).join('-'))
-
-    // TODO: understand the relationship between coeff and magnitude
-    // ...
+    // console.log(new Array(80).join('-'))
 
     var per = magSquared / targetMagnitude
-    console.log('per', per)
     return per > opts.threshold
   }
 
