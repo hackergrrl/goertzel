@@ -13,6 +13,7 @@ module.exports = function (opts) {
   if (!opts.samplesPerFrame) {
     throw new Error('must specify opts.samplesPerFrame')
   }
+  opts.samplesPerFrame = Math.floor(opts.samplesPerFrame)
 
   if (opts.sampleRate < opts.targetFrequency * 2) {
     throw new Error('sampleRate should be at least 2 times larger than targetFrequency')
