@@ -117,3 +117,36 @@ test('25 Hz and 50 Hz', function (t) {
   match = goertzel7(data)
   t.equals(match, false)
 })
+
+test('similar detectors', function (t) {
+  t.plan(3)
+
+  var sampleRate = 4000
+
+  var g1336 = goertzel({
+    targetFrequency: 1336,
+    sampleRate: sampleRate,
+    numSamples: 1000
+  })
+  var g1477 = goertzel({
+    targetFrequency: 1477,
+    sampleRate: sampleRate,
+    numSamples: 1000
+  })
+  var g1633 = goertzel({
+    targetFrequency: 1633,
+    sampleRate: sampleRate,
+    numSamples: 1000
+  })
+
+  var data = []
+
+  for (var i = 0; i < 1000; i++) {
+    var v = sin(1477, i / sampleRate)
+    data.push(v)
+  }
+
+  t.equals(g1336(data), false)
+  t.equals(g1477(data), true)
+  t.equals(g1633(data), false)
+})
