@@ -118,32 +118,35 @@ test('25 Hz and 50 Hz', function (t) {
   t.equals(match, false)
 })
 
-test('similar detectors', function (t) {
+test('similar detectors at high sample rate', function (t) {
   t.plan(3)
 
-  var sampleRate = 4000
+  // var sampleRate = 8000
+  // var samplesPerFrame = 70
+  var sampleRate = 44100
+  // 664 => fails
+  // 663 => succeeds
+  var samplesPerFrame = 664 // 420
 
   var g1336 = goertzel({
     targetFrequency: 1336,
     sampleRate: sampleRate,
-    numSamples: 1000
+    numSamples: samplesPerFrame
   })
   var g1477 = goertzel({
     targetFrequency: 1477,
     sampleRate: sampleRate,
-    numSamples: 1000
+    numSamples: samplesPerFrame
   })
   var g1633 = goertzel({
     targetFrequency: 1633,
     sampleRate: sampleRate,
-    numSamples: 1000
+    numSamples: samplesPerFrame
   })
 
-  var data = []
-
-  for (var i = 0; i < 1000; i++) {
-    var v = sin(1477, i / sampleRate)
-    data.push(v)
+  var data = new Array(samplesPerFrame)
+  for (var i = 0; i < samplesPerFrame; i++) {
+    data[i] = sin(1477, i / sampleRate)
   }
 
   t.equals(g1336(data), false)

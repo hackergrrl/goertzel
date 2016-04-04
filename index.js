@@ -2,7 +2,7 @@ module.exports = function (opts) {
   // if (!(this instanceof Goertzel)) return new Goertzel(opts)
   if (!opts) opts = {}
 
-  if (!opts.threshold) opts.threshold = 1000
+  if (!opts.threshold) opts.threshold = 1500
 
   if (!opts.targetFrequency) {
     throw new Error('must specify opts.targetFrequency')
