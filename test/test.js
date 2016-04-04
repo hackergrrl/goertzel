@@ -15,14 +15,14 @@ test('1 Hz', function (t) {
     // samples per second
     sampleRate: 100,
     // samples per block
-    numSamples: 100
+    samplesPerFrame: 100
   }
 
   var detect = goertzel(opts)
 
   // generate a sine wave at 1 Hz
   var data = []
-  for (var i = 0; i < opts.numSamples; i++) {
+  for (var i = 0; i < opts.samplesPerFrame; i++) {
     var v = sin(opts.targetFrequency, i / opts.sampleRate)
     data.push(v)
   }
@@ -40,14 +40,14 @@ test('5 kHz', function (t) {
     // samples per second
     sampleRate: 20000,
     // samples per block
-    numSamples: 100
+    samplesPerFrame: 100
   }
 
   var detect = goertzel(opts)
 
   // generate a sine wave at 5000 Hz
   var data = []
-  for (var i = 0; i < opts.numSamples; i++) {
+  for (var i = 0; i < opts.samplesPerFrame; i++) {
     var v = sin(opts.targetFrequency, i / opts.sampleRate)
     data.push(v)
   }
@@ -70,7 +70,8 @@ test('25 Hz and 50 Hz', function (t) {
     // samples per second
     sampleRate: sampleRate,
     // samples per block
-    numSamples: 1000
+    samplesPerFrame: 1000,
+    threshold: 0.06
   })
   // detect 25 Hz
   var goertzel25 = goertzel({
@@ -79,7 +80,8 @@ test('25 Hz and 50 Hz', function (t) {
     // samples per second
     sampleRate: sampleRate,
     // samples per block
-    numSamples: 1000
+    samplesPerFrame: 1000,
+    threshold: 0.5
   })
   // detect 7 Hz
   var goertzel7 = goertzel({
@@ -88,7 +90,7 @@ test('25 Hz and 50 Hz', function (t) {
     // samples per second
     sampleRate: sampleRate,
     // samples per block
-    numSamples: 1000
+    samplesPerFrame: 1000
   })
 
   var data = []
@@ -131,17 +133,17 @@ test('similar detectors at high sample rate', function (t) {
   var g1336 = goertzel({
     targetFrequency: 1336,
     sampleRate: sampleRate,
-    numSamples: samplesPerFrame
+    samplesPerFrame: samplesPerFrame
   })
   var g1477 = goertzel({
     targetFrequency: 1477,
     sampleRate: sampleRate,
-    numSamples: samplesPerFrame
+    samplesPerFrame: samplesPerFrame
   })
   var g1633 = goertzel({
     targetFrequency: 1633,
     sampleRate: sampleRate,
-    numSamples: samplesPerFrame
+    samplesPerFrame: samplesPerFrame
   })
 
   var data = new Array(samplesPerFrame)
