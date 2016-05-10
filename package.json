@@ -22,5 +22,6 @@
     "fourier",
     "detect",
     "detection"
-  ]
+  ],
+  "license": "MIT"
 }
