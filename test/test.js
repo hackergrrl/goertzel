@@ -31,6 +31,56 @@ test('1 Hz', function (t) {
   t.equals(match, true)
 })
 
+// test('failing: 5 kHz with low amplitude', function (t) {
+//   t.plan(1)
+
+//   var opts = {
+//     // hz
+//     targetFrequency: 5000,
+//     // samples per second
+//     sampleRate: 20000,
+//     // samples per block
+//     samplesPerFrame: 100
+//   }
+
+//   var detect = goertzel(opts)
+
+//   // generate a sine wave at 5000 Hz
+//   var data = []
+//   for (var i = 0; i < opts.samplesPerFrame; i++) {
+//     var v = sin(opts.targetFrequency, i / opts.sampleRate) * 0.1
+//     data.push(v)
+//   }
+
+//   var match = detect(data)
+//   t.equals(match, true)
+// })
+
+// test('failing: 5 kHz with noise in front', function (t) {
+//   t.plan(1)
+
+//   var opts = {
+//     // hz
+//     targetFrequency: 5000,
+//     // samples per second
+//     sampleRate: 20000,
+//     // samples per block
+//     samplesPerFrame: 100
+//   }
+
+//   var detect = goertzel(opts)
+
+//   // generate a sine wave at 5000 Hz
+//   var data = [-1, 0, 1]
+//   for (var i = 0; i < opts.samplesPerFrame; i++) {
+//     var v = sin(opts.targetFrequency, i / opts.sampleRate)
+//     data.push(v)
+//   }
+
+//   var match = detect(data)
+//   t.equals(match, true)
+// })
+
 test('5 kHz', function (t) {
   t.plan(1)
 
